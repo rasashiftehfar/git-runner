@@ -1,0 +1,21 @@
+# go to /etc/systemd/system/git-runner.service
+
+[Unit]
+Description=Git-runner Service
+After=docker.service
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+User=root
+Group=root
+StandardOutput=null
+StandardError=null
+WorkingDirectory=/data/source/2022-01-11
+ExecStart=/usr/bin/docker-compose --env-file /etc/environment -p git-runner  up
+ExecStop=/usr/bin/docker-compose --env-file /etc/environment -p git-runner   down
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
