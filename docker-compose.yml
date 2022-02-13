@@ -1,0 +1,10 @@
+version: '3.6'
+services:
+  gitlab-runner:
+    image: 'gitlab/gitlab-runner:${version}'
+    container_name: 'git-runner-${version}'
+    restart: always
+    hostname: 'git-runner'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/gitlab-runner:/etc/gitlab-runner
